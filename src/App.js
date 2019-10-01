@@ -1,27 +1,252 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>First React app</h1>
-        <p>
-          This page was created as homework for the Solve.Care Academy course.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let isFormValid = ({ valid }) => {
+  let isValid = false;
+
+  for (let key in valid) {
+    if (valid[key].length === 0) {
+      isValid = true;
+    }
+  }
+
+  return isValid;
+};
+
+class FormBody extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      cardNum: "",
+      expirationDate: "",
+      cardCvv: "",
+      firstName: "",
+      lastName: "",
+      question: "",
+      answer: "",
+      valid: {
+        cardNum: "",
+        expirationDate: "",
+        cardCvv: "",
+        firstName: "",
+        lastName: "",
+        question: "",
+        answer: "",
+      },
+      isValid: true,
+    }
+  }
+
+  validate = (name, value) => {
+    let valid = {...this.state.valid};
+
+    switch (name) {
+      case "cardNum":
+        let cardNumReg = /^[0-9]{16}/;
+        valid.cardNum = cardNumReg.test(value) ? "" : "Error";
+        break;
+      case "expirationDate":
+        let expirationDateReg = /^(0[1-9]|1[0-2])\/\d{2}$/;
+        valid.expirationDate = expirationDateReg.test(value) ? "" : "Error";
+        break;
+      case "cardCvv":
+        let cardCvvReg = /^[0-9]{3,4}$/;
+        valid.cardCvv = cardCvvReg.test(value) ? "" : "Error";
+        break;
+      case "firstName":
+        valid.firstName = value.length < 2 ? "Error" : "";
+        break;
+      case "lastName":
+        valid.lastName = value.length < 3 ? "Error" : "";
+        break;
+      case "question":
+        valid.question = value.length < 10 ? "Error" : "";
+        break;
+      case "answer":
+        valid.answer = value.length < 3 ? "Error" : "";
+        break;
+      default:
+        console.log("nothing");
+        break;
+    }
+
+    this.setState({ valid, [name]: value}, () => console.log(this.state));
+  }
+
+  handleInput = e => {
+    let name = e.target.name;
+    let value = e.target.value;
+    this.setState({
+      [name]: value
+    }, () => {
+      this.validate(name, value);
+    });
+  };
+
+  handleForm = e => {
+    e.preventDefault();
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    isFormValid(this.state.valid) ? console.log("ok") : console.log("err");
+  };
+
+  render() {
+    let { valid } = this.state;
+    return(
+      <form className="form" onSubmit={this.handleSubmit} noValidate>
+        <section className="formContainer">
+          <h1 className="formHeader">Checkout form</h1>
+          <label htmlFor="cardNum" className="inputLabel" title="Enter credit card number">
+            <span>Card number</span>
+            <input 
+              type="text" 
+              name="cardNum" 
+              id="cardNum" 
+              minLength="16" 
+              maxLength="16" 
+              placeholder="1111222233334444"
+              value={this.state.value} 
+              className={valid.cardNum.length === 0 ? "" : "invalidInput"}
+              onChange={this.handleInput} 
+            />
+          </label>
+          <div className="creditCardSecurity">
+            <label htmlFor="expirationDate" className="inputLabel" title="Enter card expiry date">
+              <span>Card expiry date</span>
+              <input 
+                type="text" 
+                name="expirationDate" 
+                id="expirationDate" 
+                maxLength="5" 
+                placeholder="MM/YY"
+                value={this.state.value} 
+                className={valid.expirationDate.length === 0 ? "" : "invalidInput"}
+                onChange={this.handleInput} 
+              />
+            </label>
+            <label htmlFor="cardCvv" className="inputLabel" title="Enter card CVV2/CVC2">
+              <span>CVV2/CVC2</span>
+              <input 
+                type="text" 
+                inputMode="numeric"
+                name="cardCvv" 
+                id="cardCvv"
+                minLength="3" 
+                maxLength="4" 
+                placeholder="1234"
+                value={this.state.value} 
+                className={valid.cardCvv.length === 0 ? "" : "invalidInput"}
+                onChange={this.handleInput} 
+              />
+            </label>
+          </div>
+          <label htmlFor="firstName" className="inputLabel" title="Enter first name">
+            <span>First name</span>
+            <input 
+              type="text" 
+              name="firstName" 
+              id="firstName"
+              placeholder="Jane"
+              value={this.state.value} 
+              className={valid.firstName.length === 0 ? "" : "invalidInput"}
+              onChange={this.handleInput} 
+            />
+          </label>
+          <label htmlFor="lastName" className="inputLabel" title="Enter last name">
+            <span>Last name</span>
+            <input 
+              type="text" 
+              name="lastName" 
+              id="lastName"
+              placeholder="Doe"
+              value={this.state.value} 
+              className={valid.lastName.length === 0 ? "" : "invalidInput"}
+              onChange={this.handleInput} 
+            />
+          </label>
+          <label htmlFor="question" className="inputLabel" title="Enter security question">
+            <span>Security question</span>
+            <input 
+              type="text" 
+              name="question" 
+              id="question" 
+              placeholder="Your security question"
+              value={this.state.value} 
+              className={valid.question.length === 0 ? "" : "invalidInput"}
+              onChange={this.handleInput} 
+            />
+          </label>
+          <label htmlFor="answer" className="inputLabel" title="Enter security answer">
+            <span>Security answer</span>
+            <input 
+              type="text" 
+              name="answer" 
+              id="answer" 
+              placeholder="Your security answer"
+              value={this.state.value} 
+              className={valid.answer.length === 0 ? "" : "invalidInput"}
+              onChange={this.handleInput} 
+            />
+          </label>
+          <button type="button" className="submitButton" onClick={() => {
+            console.log(this.isValid);
+            this.props.updateResult(this.state.cardNum, this.state.firstName, this.state.lastName, this.isValid);
+          }}>
+            Submit
+          </button>
+        </section>
+      </form>
+    )
+  }
+}
+
+class FormResult extends React.Component {
+  render() {
+    return (
+      <div className="result">
+        <div>Card number: {this.props.cardNum.slice(-4)}</div>
+        <div>First Name: {this.props.firstName}</div>
+        <div>Last Name: {this.props.lastName}</div>
+      </div>
+    );
+  }
+      
+}
+
+class App extends React.Component {
+  
+  state = {
+    cardNum: "",
+    firstName: "",
+    lastName: "",
+    // isValid: true
+  }
+
+  updateResult = (cardNum, firstName, lastName, isValid) => {
+    this.setState({
+      cardNum: cardNum,
+      firstName: firstName,
+      lastName: lastName,
+      isValid: isValid,
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <FormBody updateResult={this.updateResult}/>
+        <FormResult 
+          cardNum={this.state.cardNum}
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
+          isValid={this.state.isValid}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;

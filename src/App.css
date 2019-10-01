@@ -2,21 +2,57 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form,
+.result {
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  margin: 0 auto;
+  padding-bottom: 20px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 45em;
+  background-color: #fafafa;
 }
 
-.App-link {
-  color: #09d3ac;
+.cardSection {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.creditCardSecurity {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+.creditCardSecurity input {
+  margin: .5em .5em;
+}
+
+.inputLabel {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px;
+  text-align: left;
+}
+
+.inputLabel > input {
+  padding: 1px 15px;
+  margin: 10px;
+  height: 40px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+
+.submitButton {
+  height: 40px;
+  padding: 0 20px;
+}
+
+.invalidInput {
+  border: 1px solid #ff0000;
+}
+
+.result > div {
+  margin: 5px;
 }
