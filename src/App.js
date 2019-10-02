@@ -5,7 +5,8 @@ let isFormValid = ({ valid }) => {
   let isValid = false;
 
   for (let key in valid) {
-    if (valid[key].length === 0) {
+    console.log(valid[key]);
+    if (valid[key].length === true) {
       isValid = true;
     }
   }
@@ -26,13 +27,13 @@ class FormBody extends React.Component {
       question: "",
       answer: "",
       valid: {
-        cardNum: "",
-        expirationDate: "",
-        cardCvv: "",
-        firstName: "",
-        lastName: "",
-        question: "",
-        answer: "",
+        cardNum: true,
+        expirationDate: true,
+        cardCvv: true,
+        firstName: true,
+        lastName: true,
+        question: true,
+        answer: true,
       },
       isValid: true,
     }
@@ -40,31 +41,34 @@ class FormBody extends React.Component {
 
   validate = (name, value) => {
     let valid = {...this.state.valid};
+    console.log('here i am');
 
     switch (name) {
       case "cardNum":
         let cardNumReg = /^[0-9]{16}/;
-        valid.cardNum = cardNumReg.test(value) ? "" : "Error";
+        valid.cardNum = cardNumReg.test(value) ? true : false;
+        console.log(valid.cardNum);
+        console.log(value);
         break;
       case "expirationDate":
         let expirationDateReg = /^(0[1-9]|1[0-2])\/\d{2}$/;
-        valid.expirationDate = expirationDateReg.test(value) ? "" : "Error";
+        valid.expirationDate = expirationDateReg.test(value) ? true : false;
         break;
       case "cardCvv":
         let cardCvvReg = /^[0-9]{3,4}$/;
-        valid.cardCvv = cardCvvReg.test(value) ? "" : "Error";
+        valid.cardCvv = cardCvvReg.test(value) ? true : false;
         break;
       case "firstName":
-        valid.firstName = value.length < 2 ? "Error" : "";
+        valid.firstName = value.length < 2 ? false : true;
         break;
       case "lastName":
-        valid.lastName = value.length < 3 ? "Error" : "";
+        valid.lastName = value.length < 3 ? false : true;
         break;
       case "question":
-        valid.question = value.length < 10 ? "Error" : "";
+        valid.question = value.length < 10 ? false : true;
         break;
       case "answer":
-        valid.answer = value.length < 3 ? "Error" : "";
+        valid.answer = value.length < 3 ? false : true;
         break;
       default:
         console.log("nothing");
@@ -84,9 +88,9 @@ class FormBody extends React.Component {
     });
   };
 
-  handleForm = e => {
-    e.preventDefault();
-  };
+  // handleForm = e => {
+  //   e.preventDefault();
+  // };
 
   handleSubmit = e => {
     e.preventDefault();
@@ -109,7 +113,7 @@ class FormBody extends React.Component {
               maxLength="16" 
               placeholder="1111222233334444"
               value={this.state.value} 
-              className={valid.cardNum.length === 0 ? "" : "invalidInput"}
+              className={valid.cardNum === true ? "" : "invalidInput"}
               onChange={this.handleInput} 
             />
           </label>
@@ -123,7 +127,7 @@ class FormBody extends React.Component {
                 maxLength="5" 
                 placeholder="MM/YY"
                 value={this.state.value} 
-                className={valid.expirationDate.length === 0 ? "" : "invalidInput"}
+                className={valid.expirationDate === true ? "" : "invalidInput"}
                 onChange={this.handleInput} 
               />
             </label>
@@ -138,7 +142,7 @@ class FormBody extends React.Component {
                 maxLength="4" 
                 placeholder="1234"
                 value={this.state.value} 
-                className={valid.cardCvv.length === 0 ? "" : "invalidInput"}
+                className={valid.cardCvv === true ? "" : "invalidInput"}
                 onChange={this.handleInput} 
               />
             </label>
@@ -151,7 +155,7 @@ class FormBody extends React.Component {
               id="firstName"
               placeholder="Jane"
               value={this.state.value} 
-              className={valid.firstName.length === 0 ? "" : "invalidInput"}
+              className={valid.firstName === true ? "" : "invalidInput"}
               onChange={this.handleInput} 
             />
           </label>
@@ -163,7 +167,7 @@ class FormBody extends React.Component {
               id="lastName"
               placeholder="Doe"
               value={this.state.value} 
-              className={valid.lastName.length === 0 ? "" : "invalidInput"}
+              className={valid.lastName === true ? "" : "invalidInput"}
               onChange={this.handleInput} 
             />
           </label>
@@ -175,7 +179,7 @@ class FormBody extends React.Component {
               id="question" 
               placeholder="Your security question"
               value={this.state.value} 
-              className={valid.question.length === 0 ? "" : "invalidInput"}
+              className={valid.question === true ? "" : "invalidInput"}
               onChange={this.handleInput} 
             />
           </label>
@@ -187,7 +191,7 @@ class FormBody extends React.Component {
               id="answer" 
               placeholder="Your security answer"
               value={this.state.value} 
-              className={valid.answer.length === 0 ? "" : "invalidInput"}
+              className={valid.answer === true ? "" : "invalidInput"}
               onChange={this.handleInput} 
             />
           </label>
