@@ -6,13 +6,13 @@ class FormBody extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardNum: "",
-      expirationDate: "",
-      cardCvv: "",
-      firstName: "",
-      lastName: "",
-      question: "",
-      answer: "",
+      cardNum: undefined,
+      expirationDate: undefined,
+      cardCvv: undefined,
+      firstName: undefined,
+      lastName: undefined,
+      question: undefined,
+      answer: undefined,
       valid: {
         cardNum: true,
         expirationDate: true,
@@ -26,25 +26,8 @@ class FormBody extends React.Component {
     }
   }
 
-  isFormValid = () => {
-    let valid = {...this.state.valid};
-    let isValid = this.state.isValid;
-  
-    for (let key in valid) {
-      if (valid[key] !== true) {
-        isValid = false;
-      }
-    }
-  
-    this.setState({isValid: isValid}, () => {
-      // console.log(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
-      this.props.updateResult(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
-    })
-  };
-
   validate = (name, value) => {
     let valid = {...this.state.valid};
-    console.log('here i am');
 
     switch (name) {
       case "cardNum":
@@ -80,8 +63,7 @@ class FormBody extends React.Component {
   }
 
   handleInput = e => {
-    let name = e.target.name;
-    let value = e.target.value;
+    let { name, value } = e.target;
     this.setState({
       [name]: value
     }, () => {
@@ -91,7 +73,22 @@ class FormBody extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.isFormValid(this.state.valid) ? console.log("ok") : console.log("err");
+    let valid = {...this.state.valid};
+    let isValid = this.state.isValid;
+  
+    for (let key in valid) {
+      if (valid[key] !== true) {
+        isValid = false;
+        return isValid;
+      }
+    }
+  
+    this.setState({isValid: isValid}, () => {
+      // console.log(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
+      this.props.updateResult(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
+    });
+
+    return true;
   };
 
   render() {
@@ -192,7 +189,7 @@ class FormBody extends React.Component {
               onChange={this.handleInput} 
             />
           </label>
-          <button type="button" className="submitButton" onClick={this.isFormValid}>
+          <button type="submit" className="submitButton">
             Submit
           </button>
         </section>
@@ -202,8 +199,60 @@ class FormBody extends React.Component {
 }
 
 class FormResult extends React.Component {
+
+state = {
+  isShown: false,
+  timerId: undefined,
+  timerStart: undefined,
+};
+
+startTimer = () => {
+  let timerId = setTimeout(() => {
+    this.setState({
+      isShown: false,
+      timerId: false,
+      timerStart: undefined,
+    }, () => console.log('expired result'))
+  }, 5000);
+
+  this.setState({
+    isShown: true,
+    timerId: timerId,
+    timerStart: Date.now(),
+  });
+};
+
+componentDidUpdate(prevProps) {
+
+  if (
+    prevProps.cardNum === this.props.cardNum &&
+    prevProps.firstName === this.props.firstName &&
+    prevProps.lastName === this.props.lastName
+    ) {
+      return
+    }
+
+  if (!this.state.isShown) {
+    return this.startTimer();
+  }
+
+}
+
   render() {
-    if (this.props.isValid) {
+
+    if (!this.state.isShown) {
+      return null;
+    }
+
+    console.log(this.props.isValid);
+    
+    if (!this.props.isValid) {
+      return (
+        <div>
+          <h2>Error</h2>
+        </div>
+      )
+    }
       return (
         <div className="result">
           <div>Card number: {this.props.cardNum.slice(-4)}</div>
@@ -211,22 +260,16 @@ class FormResult extends React.Component {
           <div>Last Name: {this.props.lastName}</div>
         </div>
       );
-    } else {
-      return (
-        <div></div>
-      )
-    }
-    
   }
 }
 
 class App extends React.Component {
   
   state = {
-    cardNum: "",
-    firstName: "",
-    lastName: "",
-    isValid: ""
+    cardNum: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    isValid: true,
   }
 
   updateResult = (cardNum, firstName, lastName, isValid) => {
