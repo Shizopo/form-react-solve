@@ -1,4 +1,6 @@
 .App {
+  display: flex;
+  flex-flow: column nowrap;
   text-align: center;
 }
 
@@ -9,6 +11,7 @@
   margin: 0 auto;
   padding-bottom: 20px;
   align-items: center;
+  min-width: 30em;
   max-width: 45em;
   background-color: #fafafa;
 }

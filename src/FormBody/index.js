@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CardDetails from "../CardDetails";
 
 class FormBody extends React.Component {
@@ -201,6 +202,10 @@ class FormBody extends React.Component {
         </form>
       )
     }
+  }
+
+  FormBody.propTypes = {
+    updateResult: PropTypes.func,
   }
 
 export default FormBody;

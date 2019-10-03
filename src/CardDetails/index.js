@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class CardDetails extends React.Component {
 
@@ -34,6 +35,10 @@ class CardDetails extends React.Component {
         )
     }
 }
-    
+ 
+CardDetails.propTypes = {
+    cardNum: PropTypes.string,
+    handleCardType: PropTypes.func,
+  }
 
 export default CardDetails;

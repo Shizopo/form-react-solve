@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class FormResult extends React.Component {
 
@@ -62,6 +63,14 @@ class FormResult extends React.Component {
           </div>
         );
       }
+    }
+
+    FormResult.propTypes = {
+      cardNum: PropTypes.string,
+      cardType: PropTypes.string,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      isValid: PropTypes.bool,
     }
 
     export default FormResult;
