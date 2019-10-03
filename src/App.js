@@ -1,19 +1,6 @@
 import React from "react";
 import "./App.css";
 
-let isFormValid = ({ valid }) => {
-  let isValid = false;
-
-  for (let key in valid) {
-    console.log(valid[key]);
-    if (valid[key].length === true) {
-      isValid = true;
-    }
-  }
-
-  return isValid;
-};
-
 class FormBody extends React.Component {
   
   constructor(props) {
@@ -39,6 +26,22 @@ class FormBody extends React.Component {
     }
   }
 
+  isFormValid = () => {
+    let valid = {...this.state.valid};
+    let isValid = this.state.isValid;
+  
+    for (let key in valid) {
+      if (valid[key] !== true) {
+        isValid = false;
+      }
+    }
+  
+    this.setState({isValid: isValid}, () => {
+      // console.log(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
+      this.props.updateResult(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
+    })
+  };
+
   validate = (name, value) => {
     let valid = {...this.state.valid};
     console.log('here i am');
@@ -47,8 +50,6 @@ class FormBody extends React.Component {
       case "cardNum":
         let cardNumReg = /^[0-9]{16}/;
         valid.cardNum = cardNumReg.test(value) ? true : false;
-        console.log(valid.cardNum);
-        console.log(value);
         break;
       case "expirationDate":
         let expirationDateReg = /^(0[1-9]|1[0-2])\/\d{2}$/;
@@ -71,7 +72,7 @@ class FormBody extends React.Component {
         valid.answer = value.length < 3 ? false : true;
         break;
       default:
-        console.log("nothing");
+        console.log("nothing to validate");
         break;
     }
 
@@ -88,13 +89,9 @@ class FormBody extends React.Component {
     });
   };
 
-  // handleForm = e => {
-  //   e.preventDefault();
-  // };
-
   handleSubmit = e => {
     e.preventDefault();
-    isFormValid(this.state.valid) ? console.log("ok") : console.log("err");
+    this.isFormValid(this.state.valid) ? console.log("ok") : console.log("err");
   };
 
   render() {
@@ -195,10 +192,7 @@ class FormBody extends React.Component {
               onChange={this.handleInput} 
             />
           </label>
-          <button type="button" className="submitButton" onClick={() => {
-            console.log(this.isValid);
-            this.props.updateResult(this.state.cardNum, this.state.firstName, this.state.lastName, this.isValid);
-          }}>
+          <button type="button" className="submitButton" onClick={this.isFormValid}>
             Submit
           </button>
         </section>
@@ -209,15 +203,21 @@ class FormBody extends React.Component {
 
 class FormResult extends React.Component {
   render() {
-    return (
-      <div className="result">
-        <div>Card number: {this.props.cardNum.slice(-4)}</div>
-        <div>First Name: {this.props.firstName}</div>
-        <div>Last Name: {this.props.lastName}</div>
-      </div>
-    );
+    if (this.props.isValid) {
+      return (
+        <div className="result">
+          <div>Card number: {this.props.cardNum.slice(-4)}</div>
+          <div>First Name: {this.props.firstName}</div>
+          <div>Last Name: {this.props.lastName}</div>
+        </div>
+      );
+    } else {
+      return (
+        <div></div>
+      )
+    }
+    
   }
-      
 }
 
 class App extends React.Component {
@@ -226,7 +226,7 @@ class App extends React.Component {
     cardNum: "",
     firstName: "",
     lastName: "",
-    // isValid: true
+    isValid: ""
   }
 
   updateResult = (cardNum, firstName, lastName, isValid) => {
