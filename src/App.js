@@ -13,9 +13,10 @@ class App extends React.Component {
     isValid: true,
   }
 
-  updateResult = (cardNum, firstName, lastName, isValid) => {
+  updateResult = (cardNum, cardType, firstName, lastName, isValid) => {
     this.setState({
       cardNum: cardNum,
+      cardType: cardType,
       firstName: firstName,
       lastName: lastName,
       isValid: isValid,
@@ -28,6 +29,7 @@ class App extends React.Component {
         <FormBody updateResult={this.updateResult}/>
         <FormResult 
           cardNum={this.state.cardNum}
+          cardType={this.state.cardType}
           firstName={this.state.firstName}
           lastName={this.state.lastName}
           isValid={this.state.isValid}

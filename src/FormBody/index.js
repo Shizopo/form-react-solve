@@ -7,6 +7,7 @@ class FormBody extends React.Component {
       super(props);
       this.state = {
         cardNum: undefined,
+        cardType: undefined,
         expirationDate: undefined,
         cardCvv: undefined,
         firstName: undefined,
@@ -84,11 +85,15 @@ class FormBody extends React.Component {
       }
     
       this.setState({isValid: isValid}, () => {
-        this.props.updateResult(this.state.cardNum, this.state.firstName, this.state.lastName, this.state.isValid);
+        this.props.updateResult(this.state.cardNum, this.state.cardType, this.state.firstName, this.state.lastName, this.state.isValid);
       });
   
       return true;
     };
+
+    handleCardType = (cardType) => {
+      this.setState({cardType: cardType}, () => console.log(cardType));
+    }
   
     render() {
       let { valid } = this.state;
@@ -188,6 +193,7 @@ class FormBody extends React.Component {
                 onChange={this.handleInput} 
               />
             </label>
+            <div><CardDetails cardNum={this.state.cardNum} handleCardType={this.handleCardType} /></div>
             <button type="submit" className="submitButton">
               Submit
             </button>

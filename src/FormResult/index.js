@@ -25,9 +25,9 @@ class FormResult extends React.Component {
     };
     
     componentDidUpdate(prevProps) {
-    
       if (
         prevProps.cardNum === this.props.cardNum &&
+        prevProps.cardType === this.props.cardType &&
         prevProps.firstName === this.props.firstName &&
         prevProps.lastName === this.props.lastName
         ) {
@@ -56,6 +56,7 @@ class FormResult extends React.Component {
         return (
           <div className="result">
             <div>Card number: {this.props.cardNum.slice(-4)}</div>
+            <div>Card type: {this.props.cardType}</div>
             <div>First Name: {this.props.firstName}</div>
             <div>Last Name: {this.props.lastName}</div>
           </div>
