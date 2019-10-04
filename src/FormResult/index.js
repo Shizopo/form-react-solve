@@ -1,5 +1,7 @@
+// @flow
+
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 class FormResult extends React.Component {
   state = {
@@ -66,12 +68,12 @@ class FormResult extends React.Component {
   }
 }
 
-FormResult.propTypes = {
-  cardNum: PropTypes.string,
-  cardType: PropTypes.string,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  isValid: PropTypes.bool,
-};
+// FormResult.propTypes = {
+//   cardNum: PropTypes.string,
+//   cardType: PropTypes.string,
+//   firstName: PropTypes.string,
+//   lastName: PropTypes.string,
+//   isValid: PropTypes.bool,
+// };
 
 export default FormResult;

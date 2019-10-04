@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react";
 import FormBody from "./FormBody";
 import FormResult from "./FormResult";

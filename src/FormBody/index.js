@@ -1,5 +1,7 @@
+// @flow
+
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import CardDetails from "../CardDetails";
 
 class FormBody extends React.Component {
@@ -7,7 +9,6 @@ class FormBody extends React.Component {
     super(props);
     this.state = {
       cardNum: undefined,
-      // cardType: undefined,
       expirationDate: undefined,
       cardCvv: undefined,
       firstName: undefined,
@@ -90,7 +91,6 @@ class FormBody extends React.Component {
     this.setState({ isValid: isValid }, () => {
       this.props.updateResult(
         this.state.cardNum,
-        // this.state.cardType,
         this.state.firstName,
         this.state.lastName,
         this.state.isValid
@@ -240,8 +240,8 @@ class FormBody extends React.Component {
   }
 }
 
-FormBody.propTypes = {
-  updateResult: PropTypes.func,
-};
+// FormBody.propTypes = {
+//   updateResult: PropTypes.func,
+// };
 
 export default FormBody;
