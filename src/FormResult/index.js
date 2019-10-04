@@ -48,7 +48,7 @@ class FormResult extends React.Component {
       return null;
     }
 
-    if (!this.props.isValid) {
+    if (!this.props.isValid || (!this.props.cardNum)) {
       return (
         <div>
           <h2>Error</h2>

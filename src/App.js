@@ -8,25 +8,29 @@ class App extends React.Component {
   
   state = {
     cardNum: undefined,
+    cardType: undefined,
     firstName: undefined,
     lastName: undefined,
     isValid: true,
   }
 
-  updateResult = (cardNum, cardType, firstName, lastName, isValid) => {
+  updateResult = (cardNum, firstName, lastName, isValid) => {
     this.setState({
       cardNum: cardNum,
-      cardType: cardType,
       firstName: firstName,
       lastName: lastName,
       isValid: isValid,
     });
   }
 
+  handleCardType = cardType => {
+    this.setState({ cardType });
+  };
+
   render() {
     return (
       <div className="App">
-        <FormBody updateResult={this.updateResult}/>
+        <FormBody updateResult={this.updateResult} handleCardType={this.handleCardType}/>
         <FormResult 
           cardNum={this.state.cardNum}
           cardType={this.state.cardType}

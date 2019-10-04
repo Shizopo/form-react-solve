@@ -8,7 +8,7 @@ class CardDetails extends React.Component {
 
   findoutCardType = () => {
     let cardNum = this.props.cardNum;
-    let cardType = this.state.cardType;
+    let cardType = this.props.cardType;
     if (cardNum && cardNum.length === 16) {
       cardNum.slice(-4) <= 2000
         ? (cardType = "MasterCard")
@@ -32,7 +32,7 @@ class CardDetails extends React.Component {
     console.log("CardDetails component rendered");
     return (
       <div>
-        <div>{this.state.cardType}</div>
+        <div>{this.props.cardType}</div>
       </div>
     );
   }
