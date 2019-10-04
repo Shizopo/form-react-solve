@@ -42,7 +42,7 @@ class FormResult extends React.Component {
     }
     
       render() {
-    
+        console.log('FormResult component rendered');
         if (!this.state.isShown) {
           return null;
         }

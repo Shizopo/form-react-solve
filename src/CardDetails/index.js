@@ -28,6 +28,7 @@ class CardDetails extends React.Component {
     }
 
     render(){
+        console.log('CardDetails component rendered');
         return(
             <div>
                 <div>{this.state.cardType}</div>

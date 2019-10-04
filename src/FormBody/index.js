@@ -97,6 +97,7 @@ class FormBody extends React.Component {
     }
   
     render() {
+      console.log('FormBody component rendered');
       let { valid } = this.state;
       return(
         <form className="form" onSubmit={this.handleSubmit} noValidate>
@@ -194,7 +195,7 @@ class FormBody extends React.Component {
                 onChange={this.handleInput} 
               />
             </label>
-            <div><CardDetails cardNum={this.state.cardNum} handleCardType={this.handleCardType} /></div>
+            <CardDetails cardNum={this.state.cardNum} handleCardType={this.handleCardType} />
             <button type="submit" className="submitButton">
               Submit
             </button>
