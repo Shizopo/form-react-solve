@@ -43,6 +43,6 @@ class CardDetails extends React.Component {
 // CardDetails.propTypes = {
 //   cardNum: PropTypes.string,
 //   handleCardType: PropTypes.func,
-};
+// };
 
 export default CardDetails;
