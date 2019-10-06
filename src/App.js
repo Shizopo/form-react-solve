@@ -5,8 +5,19 @@ import FormBody from "./FormBody";
 import FormResult from "./FormResult";
 import "./App.css";
 
+type Props = {
 
-class App extends React.Component {
+};
+
+type State = {
+  cardNum?: string,
+  cardType?: string,
+  firstName?: string,
+  lastName?: string,
+  isValid: boolean,
+};
+
+class App extends React.Component<Props, State> {
   
   state = {
     cardNum: undefined,
@@ -16,7 +27,7 @@ class App extends React.Component {
     isValid: true,
   }
 
-  updateResult = (cardNum, firstName, lastName, isValid) => {
+  updateResult = (cardNum: string, firstName: string, lastName: string, isValid: string) => {
     this.setState({
       cardNum: cardNum,
       firstName: firstName,
@@ -25,7 +36,7 @@ class App extends React.Component {
     });
   }
 
-  handleCardType = cardType => {
+  handleCardType = (cardType: string) => {
     this.setState({ cardType });
   };
 

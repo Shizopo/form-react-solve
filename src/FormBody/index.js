@@ -4,7 +4,34 @@ import React from "react";
 // import PropTypes from "prop-types";
 import CardDetails from "../CardDetails";
 
-class FormBody extends React.Component {
+type Props = {
+  updateResult: Function,
+  handleCardType: Function,
+};
+
+type StateValidate = {
+  cardNum: boolean,
+  expirationDate: boolean,
+  cardCvv: boolean,
+  firstName: boolean,
+  lastName: boolean,
+  question: boolean,
+  answer: boolean,
+};
+
+type State = {
+  cardNum: string,
+  expirationDate: string,
+  cardCvv: string,
+  firstName: string,
+  lastName: string,
+  question: string,
+  answer: string,
+  valid: StateValidate,
+  isValid: true,
+};
+
+class FormBody extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +55,7 @@ class FormBody extends React.Component {
     };
   }
 
-  validate = (name, value) => {
+  validate = (name: string, value: string) => {
     let valid = { ...this.state.valid };
 
     switch (name) {
@@ -64,7 +91,7 @@ class FormBody extends React.Component {
     this.setState({ valid, [name]: value }, () => console.log(this.state));
   };
 
-  handleInput = e => {
+  handleInput = (e: Object) => {
     let { name, value } = e.target;
     this.setState(
       {
@@ -76,7 +103,7 @@ class FormBody extends React.Component {
     );
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: Object) => {
     e.preventDefault();
     let valid = { ...this.state.valid };
     let isValid = this.state.isValid;

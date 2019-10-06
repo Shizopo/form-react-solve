@@ -3,7 +3,16 @@
 import React from "react";
 // import PropTypes from "prop-types";
 
-class CardDetails extends React.Component {
+type Props = {
+  cardNum?: string,
+  cardType?: string,
+}
+
+type State = {
+  cardType?: string,
+}
+
+class CardDetails extends React.Component<Props, State> {
   state = {
     cardType: undefined,
   };

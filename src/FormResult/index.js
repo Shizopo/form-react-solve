@@ -3,7 +3,20 @@
 import React from "react";
 // import PropTypes from "prop-types";
 
-class FormResult extends React.Component {
+type Props = {
+  cardNum?: string,
+  cardType?: string,
+  firstName?: string,
+  lastName?: string,
+};
+
+type State = {
+  isShown: boolean,
+  timerId?: string,
+  timerStart?: string,
+};
+
+class FormResult extends React.Component<Props, State> {
   state = {
     isShown: false,
     timerId: undefined,
