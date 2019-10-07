@@ -4,6 +4,13 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import CardDetails from "../CardDetails";
 
+/* eslint-disable no-undef */
+if (process.env.NODE_ENV !== "production") {
+  const whyDidYouRender = require("@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js");
+  whyDidYouRender(React);
+}
+/* eslint-enable no-undef */
+
 type Props = {
   onSubmit: (
     cardNum?: string,
@@ -38,6 +45,7 @@ type State = {
 };
 
 class FormBody extends React.Component<Props, State> {
+  static whyDidYouRender = true;
   constructor(props: Props) {
     super(props);
     this.state = {

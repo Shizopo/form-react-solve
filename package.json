@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "eslint-plugin-flowtype": "^4.3.0",
+    "@welldone-software/why-did-you-render": "^3.3.6",
+    "eslint-plugin-flowtype": "^3.13.0",
     "husky": "^3.0.8",
     "pretty-quick": "^1.11.1",
     "prop-types": "^15.7.2",
