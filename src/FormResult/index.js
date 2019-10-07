@@ -1,19 +1,19 @@
 // @flow
 
 import React from "react";
-// import PropTypes from "prop-types";
 
 type Props = {
   cardNum?: string,
   cardType?: string,
   firstName?: string,
   lastName?: string,
+  isValid: boolean,
 };
 
 type State = {
   isShown: boolean,
-  timerId?: string,
-  timerStart?: string,
+  timerId?: TimeoutID,
+  timerStart?: number,
 };
 
 class FormResult extends React.Component<Props, State> {
@@ -28,7 +28,7 @@ class FormResult extends React.Component<Props, State> {
       this.setState(
         {
           isShown: false,
-          timerId: false,
+          timerId: undefined,
           timerStart: undefined,
         },
         () => console.log("expired result")
@@ -37,12 +37,12 @@ class FormResult extends React.Component<Props, State> {
 
     this.setState({
       isShown: true,
-      timerId: timerId,
+      timerId,
       timerStart: Date.now(),
     });
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (
       prevProps.cardNum === this.props.cardNum &&
       prevProps.cardType === this.props.cardType &&

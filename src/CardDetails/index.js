@@ -1,11 +1,11 @@
 // @flow
 
 import React from "react";
-// import PropTypes from "prop-types";
 
 type Props = {
   cardNum?: string,
   cardType?: string,
+  handleCardType: (cardType?: string) => void,
 }
 
 type State = {
@@ -21,14 +21,14 @@ class CardDetails extends React.Component<Props, State> {
     let cardNum = this.props.cardNum;
     let cardType = this.props.cardType;
     if (cardNum && cardNum.length === 16) {
-      cardNum.slice(-4) <= 2000
+      parseInt(cardNum.slice(-4), 10) <= 2000
         ? (cardType = "MasterCard")
         : (cardType = "Visa");
     }
     this.props.handleCardType(cardType);
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (
       prevProps.cardNum === this.props.cardNum ||
       !this.props.cardNum ||

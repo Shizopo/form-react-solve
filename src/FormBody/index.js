@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-// import PropTypes from "prop-types";
 import CardDetails from "../CardDetails";
 
 type Props = {
@@ -20,21 +19,23 @@ type StateValidate = {
 };
 
 type State = {
-  cardNum: string,
-  expirationDate: string,
-  cardCvv: string,
-  firstName: string,
-  lastName: string,
-  question: string,
-  answer: string,
+  cardNum?: string,
+  expirationDate:? string,
+  cardCvv?: string,
+  firstName?: string,
+  lastName?: string,
+  question?: string,
+  answer?: string,
   valid: StateValidate,
-  isValid: true,
+  isValid: boolean,
+  value?: string,
 };
 
 class FormBody extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state = {
+      value: undefined,
       cardNum: undefined,
       expirationDate: undefined,
       cardCvv: undefined,
