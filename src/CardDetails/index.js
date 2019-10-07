@@ -5,7 +5,7 @@ import React from "react";
 type Props = {
   cardNum?: string,
   cardType?: string,
-  handleCardType: (cardType?: string) => void,
+  onCardTypeChange: (cardType?: string) => void,
 };
 
 type State = {
@@ -17,7 +17,7 @@ class CardDetails extends React.Component<Props, State> {
     cardType: undefined,
   };
 
-  findoutCardType = () => {
+  checkCardType = () => {
     let cardNum = this.props.cardNum;
     let cardType = this.props.cardType;
     if (cardNum && cardNum.length === 16) {
@@ -25,7 +25,7 @@ class CardDetails extends React.Component<Props, State> {
         ? (cardType = "MasterCard")
         : (cardType = "Visa");
     }
-    this.props.handleCardType(cardType);
+    this.props.onCardTypeChange(cardType);
   };
 
   componentDidUpdate(prevProps: Props) {
@@ -36,7 +36,7 @@ class CardDetails extends React.Component<Props, State> {
     ) {
       return;
     }
-    this.findoutCardType();
+    this.checkCardType();
   }
 
   render() {

@@ -5,8 +5,13 @@ import React from "react";
 import CardDetails from "../CardDetails";
 
 type Props = {
-  updateResult: Function,
-  handleCardType: Function,
+  onSubmit: (
+    cardNum?: string,
+    firstName?: string,
+    lastName?: string,
+    isValid: boolean
+  ) => void,
+  onCardTypeChange: (cardType?: string) => void,
 };
 
 type StateValidate = {
@@ -101,8 +106,9 @@ class FormBody extends React.Component<Props, State> {
     this.setState({ valid, [name]: value }, () => console.log(this.state));
   };
 
-  handleInput = (e: Object) => {
-    let { name, value } = e.target;
+  // eslint-disable-next-line no-undef
+  handleInput = (e: SyntheticEvent<HTMLInputElement>) => {
+    let { name, value } = e.currentTarget;
     this.setState(
       {
         [name]: value,
@@ -113,7 +119,8 @@ class FormBody extends React.Component<Props, State> {
     );
   };
 
-  handleSubmit = (e: Object) => {
+  // eslint-disable-next-line no-undef
+  handleSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let valid = { ...this.state.valid };
     let isValid = this.state.isValid;
@@ -126,7 +133,7 @@ class FormBody extends React.Component<Props, State> {
     }
 
     this.setState({ isValid: isValid }, () => {
-      this.props.updateResult(
+      this.props.onSubmit(
         this.state.cardNum,
         this.state.firstName,
         this.state.lastName,
@@ -266,7 +273,7 @@ class FormBody extends React.Component<Props, State> {
           </label>
           <CardDetails
             cardNum={this.state.cardNum}
-            handleCardType={this.props.handleCardType}
+            onCardTypeChange={this.props.onCardTypeChange}
           />
           <button type="submit" className="submitButton">
             Submit

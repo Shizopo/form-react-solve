@@ -26,10 +26,10 @@ class App extends React.Component<Props, State> {
     isValid: true,
   };
 
-  updateResult = (
-    cardNum: string,
-    firstName: string,
-    lastName: string,
+  handleSubmit = (
+    cardNum?: string,
+    firstName?: string,
+    lastName?: string,
     isValid: boolean
   ) => {
     this.setState({
@@ -40,7 +40,7 @@ class App extends React.Component<Props, State> {
     });
   };
 
-  handleCardType = (cardType: string) => {
+  handleCardTypeChange = (cardType?: string) => {
     this.setState({ cardType });
   };
 
@@ -48,8 +48,8 @@ class App extends React.Component<Props, State> {
     return (
       <div className="App">
         <FormBody
-          updateResult={this.updateResult}
-          handleCardType={this.handleCardType}
+          onSubmit={this.handleSubmit}
+          onCardTypeChange={this.handleCardTypeChange}
         />
         <FormResult
           cardNum={this.state.cardNum}
