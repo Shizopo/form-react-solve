@@ -1,6 +1,7 @@
 // @flow
 
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import CardDetails from "../CardDetails";
 
 type Props = {
@@ -20,7 +21,7 @@ type StateValidate = {
 
 type State = {
   cardNum?: string,
-  expirationDate:? string,
+  expirationDate?: string,
   cardCvv?: string,
   firstName?: string,
   lastName?: string,
@@ -60,33 +61,41 @@ class FormBody extends React.Component<Props, State> {
     let valid = { ...this.state.valid };
 
     switch (name) {
-      case "cardNum":
+      case "cardNum": {
         let cardNumReg = /^[0-9]{16}/;
         valid.cardNum = cardNumReg.test(value) ? true : false;
         break;
-      case "expirationDate":
+      }
+      case "expirationDate": {
         let expirationDateReg = /^(0[1-9]|1[0-2])\/\d{2}$/;
         valid.expirationDate = expirationDateReg.test(value) ? true : false;
         break;
-      case "cardCvv":
+      }
+      case "cardCvv": {
         let cardCvvReg = /^[0-9]{3,4}$/;
         valid.cardCvv = cardCvvReg.test(value) ? true : false;
         break;
-      case "firstName":
+      }
+      case "firstName": {
         valid.firstName = value.length < 2 ? false : true;
         break;
-      case "lastName":
+      }
+      case "lastName": {
         valid.lastName = value.length < 3 ? false : true;
         break;
-      case "question":
+      }
+      case "question": {
         valid.question = value.length < 10 ? false : true;
         break;
-      case "answer":
+      }
+      case "answer": {
         valid.answer = value.length < 3 ? false : true;
         break;
-      default:
+      }
+      default: {
         console.log("nothing to validate");
         break;
+      }
     }
 
     this.setState({ valid, [name]: value }, () => console.log(this.state));
@@ -126,7 +135,7 @@ class FormBody extends React.Component<Props, State> {
     });
 
     return true;
-  };  
+  };
 
   render() {
     console.log("FormBody component rendered");
@@ -267,9 +276,5 @@ class FormBody extends React.Component<Props, State> {
     );
   }
 }
-
-// FormBody.propTypes = {
-//   updateResult: PropTypes.func,
-// };
 
 export default FormBody;

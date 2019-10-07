@@ -6,11 +6,11 @@ type Props = {
   cardNum?: string,
   cardType?: string,
   handleCardType: (cardType?: string) => void,
-}
+};
 
 type State = {
   cardType?: string,
-}
+};
 
 class CardDetails extends React.Component<Props, State> {
   state = {
@@ -48,10 +48,5 @@ class CardDetails extends React.Component<Props, State> {
     );
   }
 }
-
-// CardDetails.propTypes = {
-//   cardNum: PropTypes.string,
-//   handleCardType: PropTypes.func,
-// };
 
 export default CardDetails;

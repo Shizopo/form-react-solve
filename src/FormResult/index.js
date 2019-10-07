@@ -12,6 +12,7 @@ type Props = {
 
 type State = {
   isShown: boolean,
+  // eslint-disable-next-line no-undef
   timerId?: TimeoutID,
   timerStart?: number,
 };
@@ -63,7 +64,7 @@ class FormResult extends React.Component<Props, State> {
       return null;
     }
 
-    if (!this.props.isValid || (!this.props.cardNum)) {
+    if (!this.props.isValid || !this.props.cardNum) {
       return (
         <div>
           <h2>Error</h2>
@@ -80,13 +81,5 @@ class FormResult extends React.Component<Props, State> {
     );
   }
 }
-
-// FormResult.propTypes = {
-//   cardNum: PropTypes.string,
-//   cardType: PropTypes.string,
-//   firstName: PropTypes.string,
-//   lastName: PropTypes.string,
-//   isValid: PropTypes.bool,
-// };
 
 export default FormResult;
