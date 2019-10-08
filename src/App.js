@@ -49,7 +49,7 @@ class App extends React.Component<Props, State> {
     });
   };
 
-  handleCardTypeChange = (cardType?: string) => {
+  handleCardTypeChange = (cardType: string | void) => {
     this.setState({ cardType });
   };
 

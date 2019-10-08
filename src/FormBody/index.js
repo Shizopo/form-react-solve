@@ -4,13 +4,6 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import CardDetails from "../CardDetails";
 
-/* eslint-disable no-undef */
-if (process.env.NODE_ENV !== "production") {
-  const whyDidYouRender = require("@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js");
-  whyDidYouRender(React);
-}
-/* eslint-enable no-undef */
-
 type Props = {
   onSubmit: (
     cardNum?: string,
@@ -18,7 +11,7 @@ type Props = {
     lastName?: string,
     isValid: boolean
   ) => void,
-  onCardTypeChange: (cardType?: string) => void,
+  onCardTypeChange: (cardType: string | void) => void,
 };
 
 type StateValidate = {
@@ -140,7 +133,7 @@ class FormBody extends React.Component<Props, State> {
       }
     }
 
-    this.setState({ isValid: isValid }, () => {
+    this.setState({ isValid }, () => {
       this.props.onSubmit(
         this.state.cardNum,
         this.state.firstName,

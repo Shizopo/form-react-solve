@@ -2,13 +2,6 @@
 
 import React from "react";
 
-/* eslint-disable no-undef */
-if (process.env.NODE_ENV !== "production") {
-  const whyDidYouRender = require("@welldone-software/why-did-you-render/dist/no-classes-transpile/umd/whyDidYouRender.min.js");
-  whyDidYouRender(React);
-}
-/* eslint-enable no-undef */
-
 type Props = {
   cardNum?: string,
   cardType?: string,
