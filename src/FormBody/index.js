@@ -65,6 +65,7 @@ class FormBody extends React.Component<Props, State> {
 
   validate = (name: string, value: string) => {
     let valid = { ...this.state.valid };
+    console.log(this.state.valid, this.state.isValid);
 
     switch (name) {
       case "cardNum": {

@@ -47,7 +47,6 @@ class FormResult extends React.Component<Props, State> {
   componentDidUpdate(prevProps: Props) {
     if (
       prevProps.cardNum === this.props.cardNum &&
-      prevProps.cardType === this.props.cardType &&
       prevProps.firstName === this.props.firstName &&
       prevProps.lastName === this.props.lastName
     ) {
@@ -60,12 +59,14 @@ class FormResult extends React.Component<Props, State> {
   }
 
   render() {
+    const { cardNum, firstName, lastName, cardType, isValid } = this.props;
+
     console.log("FormResult component rendered");
     if (!this.state.isShown) {
       return null;
     }
 
-    if (!this.props.isValid || !this.props.cardNum) {
+    if (!isValid || !cardNum) {
       return (
         <div>
           <h2>Error</h2>
@@ -74,10 +75,10 @@ class FormResult extends React.Component<Props, State> {
     }
     return (
       <div className="result">
-        <div>Card number: {this.props.cardNum.slice(-4)}</div>
-        <div>Card type: {this.props.cardType}</div>
-        <div>First Name: {this.props.firstName}</div>
-        <div>Last Name: {this.props.lastName}</div>
+        <div>Card number: {cardNum.slice(-4)}</div>
+        <div>Card type: {cardType}</div>
+        <div>First Name: {firstName}</div>
+        <div>Last Name: {lastName}</div>
       </div>
     );
   }
