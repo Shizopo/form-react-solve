@@ -65,7 +65,6 @@ class FormBody extends React.Component<Props, State> {
 
   validate = (name: string, value: string) => {
     let valid = { ...this.state.valid };
-    console.log(this.state.valid, this.state.isValid);
 
     switch (name) {
       case "cardNum": {
@@ -100,12 +99,11 @@ class FormBody extends React.Component<Props, State> {
         break;
       }
       default: {
-        console.log("nothing to validate");
         break;
       }
     }
 
-    this.setState({ valid, [name]: value }, () => console.log(this.state));
+    this.setState({ valid, [name]: value });
   };
 
   // eslint-disable-next-line no-undef
@@ -147,7 +145,6 @@ class FormBody extends React.Component<Props, State> {
   };
 
   render() {
-    console.log("FormBody component rendered");
     let { valid } = this.state;
     return (
       <form className="form" onSubmit={this.handleSubmit} noValidate>

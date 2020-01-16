@@ -27,14 +27,11 @@ class FormResult extends React.Component<Props, State> {
 
   startTimer = () => {
     let timerId = setTimeout(() => {
-      this.setState(
-        {
-          isShown: false,
-          timerId: undefined,
-          timerStart: undefined,
-        },
-        () => console.log("expired result")
-      );
+      this.setState({
+        isShown: false,
+        timerId: undefined,
+        timerStart: undefined,
+      });
     }, 5000);
 
     this.setState({
@@ -61,7 +58,6 @@ class FormResult extends React.Component<Props, State> {
   render() {
     const { cardNum, firstName, lastName, cardType, isValid } = this.props;
 
-    console.log("FormResult component rendered");
     if (!this.state.isShown) {
       return null;
     }

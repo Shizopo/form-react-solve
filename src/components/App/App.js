@@ -2,8 +2,8 @@
 
 import React from "react";
 /* eslint-disable no-unused-vars */
-import FormBody from "./FormBody";
-import FormResult from "./FormResult";
+import FormBody from "../FormBody";
+import FormResult from "../FormResult";
 /* eslint-enable no-unused-vars */
 import "./App.css";
 
